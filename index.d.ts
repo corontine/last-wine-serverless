@@ -1,6 +1,6 @@
 type Shop = {
-    lat: number,
-    long: number,
+    latitude: number,
+    longitude: number,
     name: string,
     city: string,
     items: Array<Item>,

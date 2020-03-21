@@ -24,8 +24,8 @@ export const ScanShops = async (lat: number, long: number, radiusInMeters: numbe
 
 export const CreateShop = async (shop: Shop) => {
     const shopDynamoItem = {
-        latitude: shop.lat,
-        longitude: shop.long,
+        latitude: shop.latitude,
+        longitude: shop.longitude,
         name: shop.name,
         city: shop.city,
         items: shop.items
@@ -34,8 +34,8 @@ export const CreateShop = async (shop: Shop) => {
     const createShopResult = await shopsTableManager.putPoint({
         RangeKeyValue: {S: Math.random().toString(36).substring(2, 15)}, // Use this to ensure uniqueness of the hash/range pairs.
         GeoPoint: { // An object specifying latitutde and longitude as plain numbers. Used to build the geohash, the hashkey and geojson data
-            latitude: shop.lat,
-            longitude: shop.long
+            latitude: shop.latitude,
+            longitude: shop.longitude
         },
         PutItemInput: { // Passed through to the underlying DynamoDB.putItem request. TableName is filled in for you.
             Item: DynamoDB.Converter.marshall(shopDynamoItem)
