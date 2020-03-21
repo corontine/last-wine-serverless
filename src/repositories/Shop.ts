@@ -2,7 +2,7 @@ import {DynamoDB} from 'aws-sdk';
 import {GeoDataManager, GeoDataManagerConfiguration} from "dynamodb-geo";
 
 
-const tableName = 'hospital_map-dev';
+const tableName = 'last-wine-dev';
 const ddb = new DynamoDB();
 const config = new GeoDataManagerConfiguration(ddb, tableName);
 config.hashKeyLength = 6;
@@ -45,15 +45,6 @@ export const CreateShop = async (shop: Shop) => {
     }).promise();
     return createShopResult;
 };
-
-// type HospitalCapacityLog = {
-//     TableName: string,
-//     Item:{
-//         senderDeviceId: string,
-//         seenDeviceId: string,
-//         timestamp: string
-//     }
-// }
 
 export const GetShopItems = async (hashKey: number, rangeKey: string) => {
 

@@ -1,5 +1,5 @@
 # NOTE: update this with your service name
-service: hospitalmap-backend
+service: last-wine-serverless
 
 plugins:
   - serverless-offline

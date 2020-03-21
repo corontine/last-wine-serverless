@@ -1,5 +1,5 @@
 import {BuildResponse} from "../helpers/Response";
-import {ScanShops} from "../repositories/Restaurant";
+import {ScanShops} from "../repositories/Shop";
 
 export const Scan = async (event: any, context: any) => {
     const parsedBody = JSON.parse(event.body);

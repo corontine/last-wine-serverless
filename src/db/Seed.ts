@@ -1,7 +1,7 @@
 // import {DynamoDB} from 'aws-sdk';
 import * as Chance from 'chance';
 import {addDays} from "date-fns";
-import {CreateHospital} from "../repositories/Restaurant";
+import {CreateShop} from "../repositories/Shop";
 
 export const Handler = async (event: any, context: any) => {
     const space = [...Array(100)];
@@ -9,8 +9,8 @@ export const Handler = async (event: any, context: any) => {
     const change = new Chance();
     const yDistance = 0.02;
     const xDistance = 0.05;
-    const hospitals = space.map((t) => {
-        const hospital: any = {
+    const shops = space.map((t) => {
+        const shop: any = {
             lat: change.latitude({min:origin[0]-yDistance, max:origin[0]+yDistance}) ,
             long: change.longitude({min: origin[1]-xDistance, max: origin[1]+xDistance}),
             name: change.company(),
@@ -24,11 +24,11 @@ export const Handler = async (event: any, context: any) => {
                 }
             ]
         };
-        return hospital;
+        return shop;
     });
 
-    for(const hospital of hospitals) {
-        const createHospitalResult = await CreateHospital(hospital);
-        console.log(createHospitalResult);
+    for(const shop of shops) {
+        const createShopResult = await CreateShop(shop);
+        console.log(createShopResult);
     }
 };
