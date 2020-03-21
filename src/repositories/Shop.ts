@@ -46,8 +46,17 @@ export const CreateShop = async (shop: Shop) => {
     return createShopResult;
 };
 
-export const GetShopItems = async (hashKey: number, rangeKey: string) => {
-
+export const GetShop = async (hashKey: number, rangeKey: string) => {
+    const params = {
+        "TableName": tableName,
+        "KeyConditionExpression": "hashKey = :hashKey AND rangeKey = :rangeKey",
+        "ExpressionAttributeValues": {
+            ":hashKey": hashKey,
+            ":rangeKey": rangeKey
+        }
+    };
+    const shopInDynamo = await docClient.query(params).promise();
+    return shopInDynamo;
 };
 
 export const GetHospitalCapacityLogs = async (hashKey: number, rangeKey: string) => {

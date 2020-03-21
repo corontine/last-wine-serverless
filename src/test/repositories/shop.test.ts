@@ -1,15 +1,15 @@
-import {GetHospitalCapacityLogs, ScanHospitals} from "../../repositories/Shop";
+import {GetShop, ScanShops} from "../../repositories/Shop";
 
-test('hospitals can be searched with geolocation', async() => {
+test('shops can be searched with geolocation', async() => {
     const berlinGeoLocation = [52.50, 13.40];
-    const berlinHospitals = await ScanHospitals(berlinGeoLocation[0], berlinGeoLocation[1], 10000);
-    console.log(berlinHospitals);
+    const berlinShops = await ScanShops(berlinGeoLocation[0], berlinGeoLocation[1], 10000);
+    console.log(berlinShops);
 });
 
 
-test('hospitals can be queried with hash and range keys', async () => {
-    const hashKey = 516346;
-    const rangeKey = "0apwckwv7k6";
-    const hospitalCapacityLogs = await GetHospitalCapacityLogs(hashKey, rangeKey);
-    console.log(hospitalCapacityLogs);
+test('shops can be queried with hash and range keys', async () => {
+    const hashKey = 511883;
+    const rangeKey = "hzseuwinis";
+    const shop = await GetShop(hashKey, rangeKey);
+    console.log(shop);
 });
