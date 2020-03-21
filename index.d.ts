@@ -3,6 +3,7 @@ type Shop = {
     longitude: number,
     name: string,
     city: string,
+    address: string,
     items: Array<Item>,
     userId: string
 }

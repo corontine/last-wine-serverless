@@ -28,6 +28,7 @@ export const CreateShop = async (shop: Shop) => {
         longitude: shop.longitude,
         name: shop.name,
         city: shop.city,
+        address: shop.address,
         items: shop.items
     };
 
