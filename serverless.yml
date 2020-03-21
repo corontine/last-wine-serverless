@@ -34,8 +34,8 @@ functions:
   seed:
     handler: src/db/Seed.Handler
   scanHospitals:
-    handler: src/controllers/Hospitals.Scan
+    handler: src/controllers/Shops.Scan
     events:
       - http:
           method: POST
-          path: hospitals/scan
+          path: shops/scan

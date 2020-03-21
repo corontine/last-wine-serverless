@@ -18,7 +18,6 @@ export const ScanShops = async (lat: number, long: number, radiusInMeters: numbe
             longitude: long
         }
     });
-
     // @ts-ignore
     return scanResults.map(DynamoDB.Converter.unmarshall);
 };

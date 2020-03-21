@@ -6,7 +6,7 @@ import {GeoDataManagerConfiguration, GeoTableUtil} from "dynamodb-geo";
 
 export const Handler = async (event:any, context:any) => {
     const ddb = new DynamoDB();
-    const config = new GeoDataManagerConfiguration(ddb, `hospital_map-dev`);
+    const config = new GeoDataManagerConfiguration(ddb, `last-wine-dev`);
     config.hashKeyLength = 6;
 
 
