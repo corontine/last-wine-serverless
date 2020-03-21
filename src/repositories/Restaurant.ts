@@ -6,12 +6,12 @@ const tableName = 'hospital_map-dev';
 const ddb = new DynamoDB();
 const config = new GeoDataManagerConfiguration(ddb, tableName);
 config.hashKeyLength = 6;
-const hospitalTableManager = new GeoDataManager(config);
+const shopsTableManager = new GeoDataManager(config);
 const docClient = new DynamoDB.DocumentClient();
 
 
-export const ScanRestaurant = async (lat: number, long: number, radiusInMeters: number) => {
-    const scanResults = await hospitalTableManager.queryRadius({
+export const ScanShops = async (lat: number, long: number, radiusInMeters: number) => {
+    const scanResults = await shopsTableManager.queryRadius({
         RadiusInMeter: radiusInMeters,
         CenterPoint: {
             latitude: lat,
@@ -23,39 +23,27 @@ export const ScanRestaurant = async (lat: number, long: number, radiusInMeters: 
     return scanResults.map(DynamoDB.Converter.unmarshall);
 };
 
-export const CreateRestaurant = async (hospital: Hospital) => {
+export const CreateShop = async (shop: Shop) => {
+    const shopDynamoItem = {
+        latitude: shop.lat,
+        longitude: shop.long,
+        name: shop.name,
+        city: shop.city,
+        items: shop.items
+    };
 
-
-    const createRestaurantResult = await hospitalTableManager.putPoint({
+    const createShopResult = await shopsTableManager.putPoint({
         RangeKeyValue: {S: Math.random().toString(36).substring(2, 15)}, // Use this to ensure uniqueness of the hash/range pairs.
         GeoPoint: { // An object specifying latitutde and longitude as plain numbers. Used to build the geohash, the hashkey and geojson data
-            latitude: hospital.lat,
-            longitude: hospital.long
+            latitude: shop.lat,
+            longitude: shop.long
         },
         PutItemInput: { // Passed through to the underlying DynamoDB.putItem request. TableName is filled in for you.
-            Item: { // The primary key, geohash and geojson data is filled in for you
-                lat: {S: hospital.lat.toString()}, // Specify attribute values using { type: value } objects, like the DynamoDB API.
-                long: {S: hospital.long.toString()},
-                name: {S: hospital.name},
-                city: {S: hospital.city},
-                region: {S: hospital.region},
-                // @ts-ignore
-                capacity_logs: {
-                    L: hospital.capacity_logs.map((capacity_log) => (
-                        {
-                            M: {
-                                bed: {N: capacity_log.bed.toString()},
-                                ventilator: {N: capacity_log.ventilator.toString()},
-                                timestamp: {S: capacity_log.timestamp.toISOString()}
-                            }
-                        }
-                    ))
-                }
-            },
+            Item: DynamoDB.Converter.marshall(shopDynamoItem)
             // ... Anything else to pass through to `putItem`, eg ConditionExpression
         }
     }).promise();
-    return createRestaurantResult;
+    return createShopResult;
 };
 
 // type HospitalCapacityLog = {
@@ -67,7 +55,7 @@ export const CreateRestaurant = async (hospital: Hospital) => {
 //     }
 // }
 
-export const GetRestaurantItems = async (hashKey: number, rangeKey: string) => {
+export const GetShopItems = async (hashKey: number, rangeKey: string) => {
 
 };
 
@@ -85,7 +73,7 @@ export const GetHospitalCapacityLogs = async (hashKey: number, rangeKey: string)
     return hospitalCapacityLogs;
 };
 
-export const UpdateHospitalCapacityLogs = async (hashKey: string, rangeKey: string, newCapacityLog: HospitalCapacityLog) => {
+export const UpdateShopItems = async (hashKey: string, rangeKey: string, newShop: Shop) => {
     // TODO: Get real capacity by fixing GetHospitalCapacityLogs
     // function. Currently it's erroring out due to hash key issues.
 

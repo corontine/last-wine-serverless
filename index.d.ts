@@ -1,14 +1,14 @@
-type HospitalCapacityLog = {
-    bed: number,
-    ventilator: number,
-    timestamp: Date
-}
-
-type Hospital = {
+type Shop = {
     lat: number,
     long: number,
     name: string,
     city: string,
-    region: string,
-    capacity_logs: Array<HospitalCapacityLog>
+    items: Array<Item>,
+    userId: string
+}
+
+type Item = {
+    name: string,
+    price: number,
+    amount: number
 }
