@@ -39,3 +39,15 @@ functions:
       - http:
           method: POST
           path: shops/scan
+  getShop:
+    handler: src/controllers/Shops.Get
+    events:
+      - http:
+          method: POST
+          path: shops/get
+  createShop:
+    handler: src/controllers/Shops.Create
+    events:
+      - http:
+          method: POST
+          path: shops/create

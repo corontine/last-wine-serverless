@@ -43,7 +43,10 @@ export const CreateShop = async (shop: Shop) => {
             // ... Anything else to pass through to `putItem`, eg ConditionExpression
         }
     }).promise();
-    return createShopResult;
+
+
+    // @ts-ignore
+    return DynamoDB.Converter.unmarshall(createShopResult.$response.request.params.Item);
 };
 
 export const GetShop = async (hashKey: number, rangeKey: string) => {

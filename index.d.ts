@@ -4,8 +4,7 @@ type Shop = {
     name: string,
     city: string,
     address: string,
-    items: Array<Item>,
-    userId: string
+    items: Array<Item>
 }
 
 type Item = {
