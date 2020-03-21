@@ -33,7 +33,7 @@ functions:
     handler: src/db/Create.Handler
   seed:
     handler: src/db/Seed.Handler
-  scanHospitals:
+  scanShops:
     handler: src/controllers/Shops.Scan
     events:
       - http:
