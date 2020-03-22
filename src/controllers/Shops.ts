@@ -3,7 +3,7 @@ import {CreateShop, DeleteShop, GetShop, ScanShops} from "../repositories/Shop";
 
 export const Scan = async (event: any, context: any) => {
     const parsedBody = JSON.parse(event.body);
-    const foundShops = await ScanShops(parsedBody.latitude, parsedBody.longtitude, parsedBody.radius);
+    const foundShops = await ScanShops(parseFloat(parsedBody.latitude), parseFloat(parsedBody.longitude), parseInt(parsedBody.radiusInMeters));
     return BuildResponse(200, foundShops);
 };
 
