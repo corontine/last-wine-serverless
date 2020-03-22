@@ -17,6 +17,8 @@ export const Handler = async (event: any, context: any) => {
             name: chance.company(),
             city: chance.city(),
             address: chance.address(),
+            website: chance.domain(),
+            phone: chance.phone(),
             items: []
         } as Shop
     ));

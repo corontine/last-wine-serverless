@@ -24,6 +24,9 @@ export const ScanShops = async (lat: number, long: number, radiusInMeters: numbe
             longitude: shop.longitude,
             latitude: shop.latitude,
             name: shop.name,
+            phone: shop.phone,
+            website: shop.website,
+            address: shop.address,
             items: shop.items
         }
         ));
@@ -38,6 +41,8 @@ export const CreateShop = async (shop: Shop) => {
         longitude: shop.longitude,
         name: shop.name,
         city: shop.city,
+        website: shop.website,
+        phone: shop.phone,
         address: shop.address,
         items: shop.items
     };
