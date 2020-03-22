@@ -22,11 +22,8 @@ export const Handler = async (event: any, context: any) => {
             items: Array<Item>
         };
         const possibleItems = ["delivery","wine","water","antipasti"];
-        shop.items = Array(chance.natural({min: 0, max: 3})).map((empty)=>({
-                name: possibleItems[Math.floor(Math.random() * possibleItems.length)]
-        }
-        ));
 
+        shop.items = shuffle(possibleItems).splice(0, chance.natural({min: 0, max: 3}));
         return shop;
     });
     for(const shop of shops) {
@@ -34,3 +31,11 @@ export const Handler = async (event: any, context: any) => {
         console.log(createShopResult);
     }
 };
+
+function shuffle(a: any) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
