@@ -1,5 +1,5 @@
 import {BuildResponse} from "../helpers/Response";
-import {CreateShop, GetShop, ScanShops} from "../repositories/Shop";
+import {CreateShop, DeleteShop, GetShop, ScanShops} from "../repositories/Shop";
 
 export const Scan = async (event: any, context: any) => {
     const parsedBody = JSON.parse(event.body);
@@ -17,4 +17,10 @@ export const Create = async(event: any, context: any) => {
     const parsedBody = JSON.parse(event.body);
     const shopInDynamo = await CreateShop(parsedBody);
     return BuildResponse(200, shopInDynamo);
+};
+
+export const Delete = async(event: any, context: any) => {
+    const parsedBody = JSON.parse(event.body);
+    const deleteResult = await DeleteShop(parsedBody.hashKey, parsedBody.rangeKey);
+    return BuildResponse(200, deleteResult);
 };

@@ -52,28 +52,33 @@ export const CreateShop = async (shop: Shop) => {
 export const GetShop = async (hashKey: number, rangeKey: string) => {
     const params = {
         "TableName": tableName,
-        "KeyConditionExpression": "hashKey = :hashKey AND rangeKey = :rangeKey",
-        "ExpressionAttributeValues": {
-            ":hashKey": hashKey,
-            ":rangeKey": rangeKey
+        "Key": {
+            "hashKey": {
+                "N": hashKey
+            },
+            "rangeKey": {
+                "S": rangeKey
+            }
         }
     };
-    const shopInDynamo = await docClient.query(params).promise();
+    const shopInDynamo = await docClient.get(params).promise();
     return shopInDynamo;
 };
 
-export const GetHospitalCapacityLogs = async (hashKey: number, rangeKey: string) => {
+export const DeleteShop = async (hashKey: string, rangeKey: string) => {
     const params = {
         "TableName": tableName,
-        "KeyConditionExpression": "hashKey = :hashKey AND rangeKey = :rangeKey",
-        "ExpressionAttributeValues": {
-            ":hashKey": hashKey,
-            ":rangeKey": rangeKey
+        "Key": {
+            "hashKey": {
+                "N": hashKey
+            },
+            "rangeKey": {
+                "S": rangeKey
+            }
         }
     };
-    const hospitalCapacityLogs = await docClient.query(params).promise();
-    console.log(hospitalCapacityLogs);
-    return hospitalCapacityLogs;
+    const deleteResult = await docClient.delete(params);
+    return deleteResult;
 };
 
 export const UpdateShopItems = async (hashKey: string, rangeKey: string, newShop: Shop) => {
