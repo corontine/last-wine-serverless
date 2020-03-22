@@ -9,7 +9,7 @@ export const Scan = async (event: any, context: any) => {
 
 export const Get = async (event: any, context: any) => {
     const parsedBody = JSON.parse(event.body);
-    const shop = await GetShop(parsedBody.hashKey, parsedBody.rangeKey);
+    const shop = await GetShop(parseInt(parsedBody.hashKey), parsedBody.rangeKey);
     return BuildResponse(200, shop);
 };
 
@@ -21,6 +21,6 @@ export const Create = async(event: any, context: any) => {
 
 export const Delete = async(event: any, context: any) => {
     const parsedBody = JSON.parse(event.body);
-    const deleteResult = await DeleteShop(parsedBody.hashKey, parsedBody.rangeKey);
+    const deleteResult = await DeleteShop(parseInt(parsedBody.hashKey), parsedBody.rangeKey);
     return BuildResponse(200, deleteResult);
 };

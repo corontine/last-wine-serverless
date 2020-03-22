@@ -17,6 +17,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "exclude": [ "node_modules", "build", "webpack" ],
+  "exclude": [ "node_modules", ".build", ".webpack", ".serverless" ],
   "types": [ "typePatches" ]
 }

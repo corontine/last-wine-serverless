@@ -9,7 +9,6 @@ config.hashKeyLength = 6;
 const shopsTableManager = new GeoDataManager(config);
 const docClient = new DynamoDB.DocumentClient();
 
-
 export const ScanShops = async (lat: number, long: number, radiusInMeters: number) => {
     const scanResults = await shopsTableManager.queryRadius({
         RadiusInMeter: radiusInMeters,
@@ -50,35 +49,26 @@ export const CreateShop = async (shop: Shop) => {
 };
 
 export const GetShop = async (hashKey: number, rangeKey: string) => {
-    const params = {
-        "TableName": tableName,
-        "Key": {
-            "hashKey": {
-                "N": hashKey
-            },
-            "rangeKey": {
-                "S": rangeKey
-            }
-        }
-    };
+    const params = indexParams(hashKey, rangeKey);
     const shopInDynamo = await docClient.get(params).promise();
     return shopInDynamo;
 };
 
-export const DeleteShop = async (hashKey: string, rangeKey: string) => {
-    const params = {
+const indexParams = (hashKey: number, rangeKey: string) => (
+    {
         "TableName": tableName,
         "Key": {
-            "hashKey": {
-                "N": hashKey
-            },
-            "rangeKey": {
-                "S": rangeKey
-            }
+            "hashKey": hashKey,
+            "rangeKey": rangeKey
         }
-    };
-    const deleteResult = await docClient.delete(params);
-    return deleteResult;
+    }
+);
+
+
+export const DeleteShop = async (hashKey: number, rangeKey: string) => {
+    const params = indexParams(hashKey, rangeKey);
+    const deleteResult = await docClient.delete(params).promise();
+    return deleteResult.toString();
 };
 
 export const UpdateShopItems = async (hashKey: string, rangeKey: string, newShop: Shop) => {
