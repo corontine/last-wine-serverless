@@ -21,7 +21,7 @@ export const Handler = async (event: any, context: any) => {
             phone: chance.phone(),
             items: Array<Item>
         };
-        const possibleItems = ["delivery","wine","water","antipasti"];
+        const possibleItems = ["delivery","wine","water","antipasti"].map((itemName)=>({name: itemName}));
 
         shop.items = shuffle(possibleItems).splice(0, chance.natural({min: 0, max: 3}));
         return shop;
