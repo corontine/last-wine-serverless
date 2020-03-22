@@ -14,7 +14,7 @@ export const Handler = async (event: any, context: any) => {
         const shop = {
             latitude: shopsSeed.location.lat,
             longitude: shopsSeed.location.lng,
-            name: chance.company(),
+            name: shopsSeed.name,
             city: chance.city(),
             address: chance.address(),
             website: chance.domain(),
