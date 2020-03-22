@@ -22,15 +22,17 @@
     "jest": "^25.1.0",
     "serverless-offline": "^5.12.1",
     "serverless-plugin-typescript": "^1.1.9",
+    "@types/chance": "^1.0.9",
+    "@types/lodash": "^4.14.149",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
   },
   "dependencies": {
     "@mobily/tifi": "^0.9.1",
-    "@types/chance": "^1.0.9",
     "aws-sdk": "^2.620.0",
     "chance": "^1.1.4",
     "date-fns": "^2.11.0",
-    "dynamodb-geo": "^0.4.0"
+    "dynamodb-geo": "^0.4.0",
+    "lodash": "^4.17.15"
   }
 }

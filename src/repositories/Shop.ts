@@ -1,7 +1,6 @@
 import {DynamoDB} from 'aws-sdk';
 import {GeoDataManager, GeoDataManagerConfiguration} from "dynamodb-geo";
 
-
 const tableName = 'last-wine-dev';
 const ddb = new DynamoDB();
 const config = new GeoDataManagerConfiguration(ddb, tableName);
@@ -18,7 +17,19 @@ export const ScanShops = async (lat: number, long: number, radiusInMeters: numbe
         }
     });
     // @ts-ignore
-    return scanResults.map(DynamoDB.Converter.unmarshall);
+    const unmarshalledResults = scanResults.map(DynamoDB.Converter.unmarshall);
+    const filteredResults = unmarshalledResults.map((shop: any)=>(
+        {
+            city: shop.city,
+            longitude: shop.longitude,
+            latitude: shop.latitude,
+            name: shop.name,
+            items: shop.items
+        }
+        ));
+
+
+    return filteredResults;
 };
 
 export const CreateShop = async (shop: Shop) => {
