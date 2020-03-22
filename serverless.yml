@@ -39,21 +39,25 @@ functions:
       - http:
           method: POST
           path: shops/scan
+          cors: true
   getShop:
     handler: src/controllers/Shops.Get
     events:
       - http:
           method: POST
           path: shops/get
+          cors: true
   createShop:
     handler: src/controllers/Shops.Create
     events:
       - http:
           method: POST
           path: shops/create
+          cors: true
   deleteShop:
     handler: src/controllers/Shops.Delete
     events:
       - http:
           method: DELETE
           path: shops/delete
+          cors: true
