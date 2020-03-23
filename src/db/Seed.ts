@@ -5,7 +5,7 @@ import * as Chance from 'chance';
 
 import {CreateShop} from "../repositories/Shop";
 
-import * as shopsSeeds from "./Seed/shops.json";
+import * as shopsSeeds from "./Seed/subset.json";
 
 const chance = new Chance();
 export const Handler = async (event: any, context: any) => {
