@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@mobily/tifi": "^0.9.1",
-    "aws-sdk": "^2.620.0",
+    "aws-sdk": "^2.814.0",
     "chance": "^1.1.4",
     "date-fns": "^2.11.0",
     "dynamodb-geo": "^0.4.0",
